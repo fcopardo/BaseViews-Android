@@ -1,4 +1,4 @@
-package com.grizzly.views;
+package com.grizzly.baseViews;
 
 import android.annotation.TargetApi;
 import android.content.Context;
