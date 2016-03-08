@@ -16,19 +16,23 @@ public abstract class BaseRelativeLayout extends RelativeLayout {
 
     public BaseRelativeLayout(Context context) {
         super(context);
+        inflateBaseLayout();
     }
 
     public BaseRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        inflateBaseLayout();
     }
 
     public BaseRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        inflateBaseLayout();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public BaseRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        inflateBaseLayout();
     }
 
     protected void inflateBaseLayout(){
