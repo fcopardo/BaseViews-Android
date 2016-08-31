@@ -1,6 +1,7 @@
 package com.grizzly.baseViews;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -39,14 +40,21 @@ public abstract class BaseLinearLayout extends LinearLayout {
     }
 
     protected void inflateBaseLayout(){
-        setContainer();
+        /*setContainer();
         String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(infService);
         inflater.inflate(layout, this, true);
+        inflateComponents();*/
+        setContainer();
+        BaseView.inflateLayout(layout, getContext(), this);
         inflateComponents();
     }
 
     protected abstract void inflateComponents();
 
     protected abstract void setContainer();
+
+    protected Activity getActivity(){
+        return BaseView.getActivity(this);
+    }
 }
