@@ -38,12 +38,14 @@ public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout {
 
     public void setData(T data){
         this.data = data;
-        setContainer();
+        setControls();
     }
 
     protected abstract void inflateComponents();
 
     protected abstract void setContainer();
+
+    protected abstract void setControls();
 
     protected Activity getActivity(){
         return BaseView.getActivity(this);
