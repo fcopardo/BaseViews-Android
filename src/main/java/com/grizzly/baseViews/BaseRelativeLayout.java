@@ -43,7 +43,7 @@ public abstract class BaseRelativeLayout extends RelativeLayout {
         inflater.inflate(layout, this, true);
         inflateComponents();*/
         setContainer();
-        BaseView.inflateLayout(layout, getContext(), this);
+        if(layout>0)BaseView.inflateLayout(layout, getContext(), this);
         inflateComponents();
     }
 
