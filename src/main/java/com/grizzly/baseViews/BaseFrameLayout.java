@@ -40,7 +40,7 @@ public abstract class BaseFrameLayout extends FrameLayout {
 
     protected void inflateBaseLayout(){
         setContainer();
-        BaseView.inflateLayout(layout, getContext(), this);
+        if(layout>0)BaseView.inflateLayout(layout, getContext(), this);
         inflateComponents();
     }
 

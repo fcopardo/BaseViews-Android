@@ -46,7 +46,7 @@ public abstract class BaseLinearLayout extends LinearLayout {
         inflater.inflate(layout, this, true);
         inflateComponents();*/
         setContainer();
-        BaseView.inflateLayout(layout, getContext(), this);
+        if(layout>0)BaseView.inflateLayout(layout, getContext(), this);
         inflateComponents();
     }
 
