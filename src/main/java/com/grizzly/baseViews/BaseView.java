@@ -13,9 +13,10 @@ import android.view.ViewGroup;
 public class BaseView {
 
     static void inflateLayout(int layout, Context context, ViewGroup group){
-        String infService = Context.LAYOUT_INFLATER_SERVICE;
+        /*String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(infService);
-        inflater.inflate(layout, group, true);
+        inflater.inflate(layout, group, true);*/
+        View.inflate(context, layout, group);
     }
 
     static Activity getActivity(View view) {
