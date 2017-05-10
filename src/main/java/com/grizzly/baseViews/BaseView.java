@@ -3,6 +3,7 @@ package com.grizzly.baseViews;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,15 @@ import android.view.ViewGroup;
  */
 public class BaseView {
 
-    static void inflateLayout(int layout, Context context, ViewGroup group){
-        /*String infService = Context.LAYOUT_INFLATER_SERVICE;
+    static View inflateLayout(int layout, Context context, ViewGroup group){
+        return inflateLayout(layout, context, group, true);
+    }
+
+    static View inflateLayout(int layout, Context context, ViewGroup group, boolean attachToRoot){
+        Log.e("BaseViews", "inflating layout:"+layout);
+        String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(infService);
-        inflater.inflate(layout, group, true);*/
-        View.inflate(context, layout, group);
+        return inflater.inflate(layout, group, attachToRoot);
     }
 
     static Activity getActivity(View view) {
