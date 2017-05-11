@@ -17,23 +17,19 @@ public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout {
 
     public AbstractRelativeLayout(Context context) {
         super(context);
-        inflateBaseLayout();
     }
 
     public AbstractRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        inflateBaseLayout();
     }
 
     public AbstractRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        inflateBaseLayout();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public AbstractRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        inflateBaseLayout();
     }
 
     public void setData(T data){
@@ -41,13 +37,5 @@ public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout {
         setControls();
     }
 
-    protected abstract void inflateComponents();
-
-    protected abstract void setContainer();
-
     protected abstract void setControls();
-
-    protected Activity getActivity(){
-        return BaseView.getActivity(this);
-    }
 }

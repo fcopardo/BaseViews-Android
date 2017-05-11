@@ -40,11 +40,6 @@ public abstract class BaseLinearLayout extends LinearLayout {
     }
 
     protected void inflateBaseLayout(){
-        /*setContainer();
-        String infService = Context.LAYOUT_INFLATER_SERVICE;
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(infService);
-        inflater.inflate(layout, this, true);
-        inflateComponents();*/
         setContainer();
         if(layout>0)BaseView.inflateLayout(layout, getContext(), this);
         inflateComponents();

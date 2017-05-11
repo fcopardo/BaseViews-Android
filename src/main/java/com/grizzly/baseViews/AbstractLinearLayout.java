@@ -16,23 +16,19 @@ public abstract class AbstractLinearLayout<T> extends BaseLinearLayout {
 
     public AbstractLinearLayout(Context context) {
         super(context);
-        inflateBaseLayout();
     }
 
     public AbstractLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        inflateBaseLayout();
     }
 
     public AbstractLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        inflateBaseLayout();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public AbstractLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        inflateBaseLayout();
     }
 
     public void setData(T data){
@@ -40,11 +36,5 @@ public abstract class AbstractLinearLayout<T> extends BaseLinearLayout {
         setContainer();
     }
 
-    protected abstract void inflateComponents();
-
-    protected abstract void setContainer();
-
-    protected Activity getActivity(){
-        return BaseView.getActivity(this);
-    }
+    protected abstract void setControls();
 }

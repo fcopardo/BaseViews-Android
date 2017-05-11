@@ -18,7 +18,6 @@ public class BaseView {
     }
 
     static View inflateLayout(int layout, Context context, ViewGroup group, boolean attachToRoot){
-        Log.e("BaseViews", "inflating layout:"+layout);
         String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(infService);
         return inflater.inflate(layout, group, attachToRoot);
