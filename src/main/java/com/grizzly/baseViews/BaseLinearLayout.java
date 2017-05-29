@@ -4,8 +4,11 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.support.v4.view.AsyncLayoutInflater;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 /**
@@ -41,8 +44,15 @@ public abstract class BaseLinearLayout extends LinearLayout {
 
     protected void inflateBaseLayout(){
         setContainer();
-        if(layout>0)BaseView.inflateLayout(layout, getContext(), this);
-        inflateComponents();
+        if(layout>0){
+            //BaseView.inflateLayout(layout, getContext(), this);
+            BaseView.inflateLayout(layout, getContext(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
+                public void onInflateFinished(View view, int resid, ViewGroup parent) {
+                    inflateComponents();
+                }
+            });
+        }
+        //inflateComponents();
     }
 
     protected abstract void inflateComponents();

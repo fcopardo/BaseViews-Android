@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v4.view.AsyncLayoutInflater;
 
 /**
  * Created by FcoPardo on 7/6/16.
@@ -21,6 +22,11 @@ public class BaseView {
         String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(infService);
         return inflater.inflate(layout, group, attachToRoot);
+    }
+
+    static void inflateLayout(int layout, Context context, ViewGroup group, AsyncLayoutInflater.OnInflateFinishedListener inflatedListener){
+        AsyncLayoutInflater inflater = new AsyncLayoutInflater(context);
+        inflater.inflate(layout, group, inflatedListener);
     }
 
     static Activity getActivity(View view) {
