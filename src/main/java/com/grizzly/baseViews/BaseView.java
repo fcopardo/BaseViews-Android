@@ -14,6 +14,10 @@ import android.support.v4.view.AsyncLayoutInflater;
  */
 public class BaseView {
 
+    interface OnInflationFinished{
+        void make();
+    }
+
     static View inflateLayout(int layout, Context context, ViewGroup group){
         return inflateLayout(layout, context, group, true);
     }
