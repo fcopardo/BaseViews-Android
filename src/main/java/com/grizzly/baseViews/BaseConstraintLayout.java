@@ -38,22 +38,13 @@ public abstract class BaseConstraintLayout extends ConstraintLayout {
         setContainer();
         if(layout>0){
             //BaseView.inflateLayout(layout, getContext(), this);
-            try{
-                BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
-                    public void onInflateFinished(View view, int resid, ViewGroup parent) {
-                        addView(view);
-                        inflateComponents();
-                        inflated = true;
-                    }
-                });
-            }catch (InflateException e){
-                Log.e("BaseViews", "View inflation failing for class "+getClass().getSimpleName()+" with layout "+layout
-                +"\nresorting to regular inflation ");
-                e.printStackTrace();
-                BaseView.inflateLayout(layout, getContext(), this);
-                inflateComponents();
-                inflated = true;
-            }
+            BaseView.inflateLayout(layout, getContext(), this, new BaseView.OnInflationFinished() {
+                public void onSuccess(boolean async) {
+                    if(async) addView();
+                    inflateComponents();
+                    inflated = true;
+                }
+            }, true);
         }
         //inflateComponents();
     }

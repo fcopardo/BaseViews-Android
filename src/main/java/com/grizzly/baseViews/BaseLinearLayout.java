@@ -50,7 +50,7 @@ public abstract class BaseLinearLayout extends LinearLayout {
         if(layout>0){
             //BaseView.inflateLayout(layout, getContext(), this);
             try{
-                BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
+                BaseView.inflateLayout(layout, getActivity(), null, new AsyncLayoutInflater.OnInflateFinishedListener() {
                     public void onInflateFinished(View view, int resid, ViewGroup parent) {
                         addView(view);
                         inflateComponents();

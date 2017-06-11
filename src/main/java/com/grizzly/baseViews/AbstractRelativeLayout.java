@@ -1,7 +1,6 @@
 package com.grizzly.baseViews;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.support.v4.view.AsyncLayoutInflater;
@@ -10,7 +9,6 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 /**
  * Created by FcoPardo on 3/6/16.
@@ -49,7 +47,7 @@ public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout {
         setContainer();
         if(layout>0){
             try{
-                BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
+                BaseView.inflateLayout(layout, getActivity(), null, new AsyncLayoutInflater.OnInflateFinishedListener() {
                     public void onInflateFinished(View view, int resid, ViewGroup parent) {
                         addView(view);
                         inflateComponents();

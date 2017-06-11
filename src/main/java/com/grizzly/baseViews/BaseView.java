@@ -3,6 +3,7 @@ package com.grizzly.baseViews;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import android.support.v4.view.AsyncLayoutInflater;
 public class BaseView {
 
     interface OnInflationFinished{
-        void make();
+        void onSuccess(boolean async);
     }
 
     static View inflateLayout(int layout, Context context, ViewGroup group){
@@ -31,6 +32,20 @@ public class BaseView {
     static void inflateLayout(int layout, Context context, ViewGroup group, AsyncLayoutInflater.OnInflateFinishedListener inflatedListener){
         AsyncLayoutInflater inflater = new AsyncLayoutInflater(context);
         inflater.inflate(layout, group, inflatedListener);
+    }
+
+    static void inflateLayout(int layout, Context context, ViewGroup group, final @NonNull OnInflationFinished onInflationFinished, boolean async){
+        if(async) {
+            AsyncLayoutInflater inflater = new AsyncLayoutInflater(context);
+            inflater.inflate(layout, group, new AsyncLayoutInflater.OnInflateFinishedListener() {
+                public void onInflateFinished(View view, int resid, ViewGroup parent) {
+                    onInflationFinished.onSuccess(true);
+                }
+            });
+        }else{
+            inflateLayout(layout, context, group);
+            onInflationFinished.onSuccess(false);
+        }
     }
 
     static Activity getActivity(View view) {
