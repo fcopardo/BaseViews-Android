@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 /**
  * Created by FcoPardo on 3/6/16.
  */
-public abstract class AbstractFrameLayout<T> extends BaseFrameLayout {
+public abstract class AbstractFrameLayout<T> extends BaseFrameLayout implements BaseView.OnDataDrivenView<T>  {
 
     protected T data;
     protected Class<T> dataClass;

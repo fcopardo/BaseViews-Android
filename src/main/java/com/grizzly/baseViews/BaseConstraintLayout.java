@@ -27,7 +27,6 @@ public abstract class BaseConstraintLayout extends ConstraintLayout {
         inflateBaseLayout();
     }
 
-
     protected void inflateBaseLayout(){
         setContainer();
         if(layout>0)BaseView.inflateLayout(layout, getContext(), this);

@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 /**
  * Created by FcoPardo on 3/6/16.
  */
-public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout {
+public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout implements BaseView.OnDataDrivenView<T>{
 
     protected T data;
     protected Class<T> dataClass;

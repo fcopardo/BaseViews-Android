@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 /**
  * Created by FcoPardo on 3/6/16.
  */
-public abstract class AbstractLinearLayout<T> extends BaseLinearLayout {
+public abstract class AbstractLinearLayout<T> extends BaseLinearLayout implements BaseView.OnDataDrivenView<T>{
 
     protected T data;
     protected Class<T> dataClass;
