@@ -34,7 +34,7 @@ public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout {
 
     public void setData(T data){
         this.data = data;
-        setControls();
+        if(data != null)setControls();
     }
 
     protected abstract void setControls();

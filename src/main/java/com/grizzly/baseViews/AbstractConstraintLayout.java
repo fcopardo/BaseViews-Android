@@ -25,7 +25,7 @@ public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout {
 
     public void setData(T data){
         this.data = data;
-        setControls();
+        if(data != null)setControls();
     }
 
     protected abstract void setControls();
