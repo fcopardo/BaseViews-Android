@@ -13,6 +13,10 @@ import android.view.ViewGroup;
  */
 public class BaseView {
 
+    public interface OnDataDrivenView<T>{
+        void setData(T data);
+    }
+
     static View inflateLayout(int layout, Context context, ViewGroup group){
         return inflateLayout(layout, context, group, true);
     }
