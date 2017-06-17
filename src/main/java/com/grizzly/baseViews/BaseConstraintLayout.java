@@ -33,14 +33,13 @@ public abstract class BaseConstraintLayout extends ConstraintLayout {
         inflateBaseLayout();
     }
 
-
     protected void inflateBaseLayout(){
         setContainer();
         if(layout>0){
             //BaseView.inflateLayout(layout, getContext(), this);
             BaseView.inflateLayout(layout, getContext(), this, new BaseView.OnInflationFinished() {
-                public void onSuccess(boolean async) {
-                    if(async) addView();
+                public void onSuccess(boolean async, View view) {
+                    if(async) addView(view);
                     inflateComponents();
                     inflated = true;
                 }

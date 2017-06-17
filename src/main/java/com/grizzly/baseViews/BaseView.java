@@ -3,20 +3,26 @@ package com.grizzly.baseViews;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.view.AsyncLayoutInflater;
+import android.support.v4.view.AsyncLayoutInflater.OnInflateFinishedListener;
 
 /**
  * Created by FcoPardo on 7/6/16.
  */
 public class BaseView {
 
-    interface OnInflationFinished{
-        void onSuccess(boolean async);
+    interface OnInflationFinished {
+        void onSuccess(boolean async, View view);
+    }
+
+    public interface OnDataDrivenView<T>{
+        void setData(T data);
     }
 
     static View inflateLayout(int layout, Context context, ViewGroup group){
@@ -29,22 +35,23 @@ public class BaseView {
         return inflater.inflate(layout, group, attachToRoot);
     }
 
-    static void inflateLayout(int layout, Context context, ViewGroup group, AsyncLayoutInflater.OnInflateFinishedListener inflatedListener){
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
+    static void inflateLayout(int layout, Context context, ViewGroup group, OnInflateFinishedListener inflatedListener){
         AsyncLayoutInflater inflater = new AsyncLayoutInflater(context);
         inflater.inflate(layout, group, inflatedListener);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     static void inflateLayout(int layout, Context context, ViewGroup group, final @NonNull OnInflationFinished onInflationFinished, boolean async){
         if(async) {
             AsyncLayoutInflater inflater = new AsyncLayoutInflater(context);
-            inflater.inflate(layout, group, new AsyncLayoutInflater.OnInflateFinishedListener() {
+            inflater.inflate(layout, group, new OnInflateFinishedListener() {
                 public void onInflateFinished(View view, int resid, ViewGroup parent) {
-                    onInflationFinished.onSuccess(true);
+                    onInflationFinished.onSuccess(true, view);
                 }
             });
         }else{
-            inflateLayout(layout, context, group);
-            onInflationFinished.onSuccess(false);
+            onInflationFinished.onSuccess(false, inflateLayout(layout, context, group));
         }
     }
 

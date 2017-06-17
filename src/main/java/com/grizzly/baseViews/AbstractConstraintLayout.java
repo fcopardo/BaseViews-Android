@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 /**
  * Created by FcoPardo on 3/6/16.
  */
-public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout {
+public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout implements BaseView.OnDataDrivenView<T> {
 
     protected T data;
     protected Class<T> dataClass;
@@ -30,7 +30,7 @@ public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout {
 
     public void setData(T data){
         this.data = data;
-        if(inflated)setControls();
+        if(inflated && data != null)setControls();
     }
 
     protected abstract void setControls();
@@ -40,9 +40,9 @@ public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout {
         setContainer();
         if(layout>0){
             try{
-                BaseView.inflateLayout(layout, getActivity(), null, new AsyncLayoutInflater.OnInflateFinishedListener() {
+                BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
                     public void onInflateFinished(View view, int resid, ViewGroup parent) {
-                        addView(view);
+                        //addView(view);
                         inflateComponents();
                         inflated = true;
                         if(data != null) setData(data);
