@@ -41,6 +41,10 @@ public abstract class AbstractLinearLayout<T> extends BaseLinearLayout implement
         if(inflated && data != null)setControls();
     }
 
+    public T getData(){
+        return data;
+    }
+
     protected abstract void setControls();
 
     @TargetApi(Build.VERSION_CODES.CUPCAKE)

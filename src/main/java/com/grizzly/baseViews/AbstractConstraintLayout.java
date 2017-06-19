@@ -35,6 +35,10 @@ public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout i
         if(inflated && data != null)setControls();
     }
 
+    public T getData(){
+        return data;
+    }
+
     protected abstract void setControls();
 
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
