@@ -36,5 +36,9 @@ public abstract class AbstractLinearLayout<T> extends BaseLinearLayout implement
         if(data != null)setControls();
     }
 
+    public T getData(){
+        return data;
+    }
+
     protected abstract void setControls();
 }

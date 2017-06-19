@@ -35,5 +35,9 @@ public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout imple
         if(data != null) setControls();
     }
 
+    public T getData(){
+        return data;
+    }
+
     protected abstract void setControls();
 }

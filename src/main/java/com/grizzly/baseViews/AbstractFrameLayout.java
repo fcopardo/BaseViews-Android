@@ -36,5 +36,9 @@ public abstract class AbstractFrameLayout<T> extends BaseFrameLayout implements 
         if(data != null)setControls();
     }
 
+    public T getData(){
+        return data;
+    }
+
     protected abstract void setControls();
 }
