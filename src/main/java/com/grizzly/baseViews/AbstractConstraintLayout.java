@@ -1,6 +1,8 @@
 package com.grizzly.baseViews;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.support.v4.view.AsyncLayoutInflater;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -35,6 +37,7 @@ public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout i
 
     protected abstract void setControls();
 
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
     @Override
     protected void inflateBaseLayout(){
         setContainer();
@@ -47,7 +50,7 @@ public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout i
                         inflated = true;
                         if(data != null) setData(data);
                     }
-                });
+                }, true);
             }catch (InflateException e){
                 Log.e("BaseViews", "View inflation failing for class "+getClass().getSimpleName()+" with layout "+layout
                         +"\nresorting to regular inflation ");

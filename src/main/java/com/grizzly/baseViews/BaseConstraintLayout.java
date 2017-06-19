@@ -1,7 +1,9 @@
 package com.grizzly.baseViews;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.AsyncLayoutInflater;
 import android.util.AttributeSet;
@@ -33,13 +35,14 @@ public abstract class BaseConstraintLayout extends ConstraintLayout {
         inflateBaseLayout();
     }
 
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
     protected void inflateBaseLayout(){
         setContainer();
         if(layout>0){
             //BaseView.inflateLayout(layout, getContext(), this);
-            BaseView.inflateLayout(layout, getContext(), this, new BaseView.OnInflationFinished() {
-                public void onSuccess(boolean async, View view) {
-                    if(async) addView(view);
+            BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
+                public void onInflateFinished(View view, int resid, ViewGroup parent) {
+                    addView(view);
                     inflateComponents();
                     inflated = true;
                 }

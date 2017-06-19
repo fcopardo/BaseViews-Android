@@ -42,14 +42,20 @@ public class BaseView {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
-    static void inflateLayout(int layout, Context context, ViewGroup group, final @NonNull OnInflationFinished onInflationFinished, boolean async){
+    static void inflateLayout(int layout, Context context, ViewGroup group, OnInflateFinishedListener inflatedListener, boolean attachToRoot){
+        AsyncLayoutInflater inflater = new AsyncLayoutInflater(context);
+        inflater.inflate(layout, group, inflatedListener, attachToRoot);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
+    static void inflateLayout(int layout, Context context, ViewGroup group, final @NonNull OnInflationFinished onInflationFinished, boolean async, boolean attachToRoot){
         if(async) {
             AsyncLayoutInflater inflater = new AsyncLayoutInflater(context);
             inflater.inflate(layout, group, new OnInflateFinishedListener() {
                 public void onInflateFinished(View view, int resid, ViewGroup parent) {
                     onInflationFinished.onSuccess(true, view);
                 }
-            });
+            }, attachToRoot);
         }else{
             onInflationFinished.onSuccess(false, inflateLayout(layout, context, group));
         }

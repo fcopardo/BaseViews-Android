@@ -90,6 +90,22 @@ public final class AsyncLayoutInflater {
         request.resid = resid;
         request.parent = parent;
         request.callback = callback;
+        request.attachToParent = false;
+        mInflateThread.enqueue(request);
+    }
+
+    @UiThread
+    public void inflate(@LayoutRes int resid, @Nullable ViewGroup parent,
+                        @NonNull OnInflateFinishedListener callback, boolean attachToParent) {
+        if (callback == null) {
+            throw new NullPointerException("callback argument may not be null!");
+        }
+        InflateRequest request = mInflateThread.obtainRequest();
+        request.inflater = this;
+        request.resid = resid;
+        request.parent = parent;
+        request.callback = callback;
+        request.attachToParent = attachToParent;
         mInflateThread.enqueue(request);
     }
 
@@ -115,6 +131,7 @@ public final class AsyncLayoutInflater {
         int resid;
         View view;
         OnInflateFinishedListener callback;
+        boolean attachToParent;
 
         InflateRequest() {
         }
@@ -182,7 +199,7 @@ public final class AsyncLayoutInflater {
 
                 try {
                     request.view = request.inflater.mInflater.inflate(
-                            request.resid, request.parent, true);
+                            request.resid, request.parent, request.attachToParent);
                 } catch (RuntimeException ex) {
                     // Probably a Looper failure, retry on the UI thread
                     Log.w(TAG, "Failed to inflate resource in the background! Retrying on the UI"

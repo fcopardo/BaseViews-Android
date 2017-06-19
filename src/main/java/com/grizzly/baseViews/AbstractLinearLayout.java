@@ -43,6 +43,7 @@ public abstract class AbstractLinearLayout<T> extends BaseLinearLayout implement
 
     protected abstract void setControls();
 
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
     @Override
     protected void inflateBaseLayout(){
         setContainer();
@@ -55,7 +56,7 @@ public abstract class AbstractLinearLayout<T> extends BaseLinearLayout implement
                         inflated = true;
                         if(data != null) setData(data);
                     }
-                });
+                }, true);
             }catch (InflateException e){
                 Log.e("BaseViews", "View inflation failing for class "+getClass().getSimpleName()+" with layout "+layout
                         +"\nresorting to regular inflation ");
