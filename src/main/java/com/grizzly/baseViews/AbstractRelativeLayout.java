@@ -6,11 +6,14 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.*;
 import android.util.AttributeSet;
+<<<<<<< HEAD
 import android.util.Log;
 import android.view.InflateException;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.view.AsyncLayoutInflater.OnInflateFinishedListener;
+=======
+>>>>>>> 0ef051d9b0f51ae7ad263ee9dec1b07e3f7864e7
 
 /**
  * Created by FcoPardo on 3/6/16.
@@ -39,7 +42,7 @@ public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout imple
 
     public void setData(T data){
         this.data = data;
-        if(inflated && data != null)setControls();
+        if(data != null) setControls();
     }
 
     protected abstract void setControls();
