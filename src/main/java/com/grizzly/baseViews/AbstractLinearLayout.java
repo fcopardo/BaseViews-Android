@@ -52,19 +52,15 @@ public abstract class AbstractLinearLayout<T> extends BaseLinearLayout implement
     protected void inflateBaseLayout(){
         setContainer();
         if(layout>0){
-            try{
+            if(async){
                 BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
                     public void onInflateFinished(View view, int resid, ViewGroup parent) {
-                        //addView(view);
                         inflateComponents();
                         inflated = true;
                         if(data != null) setData(data);
                     }
                 }, true);
-            }catch (InflateException e){
-                Log.e("BaseViews", "View inflation failing for class "+getClass().getSimpleName()+" with layout "+layout
-                        +"\nresorting to regular inflation ");
-                e.printStackTrace();
+            }else{
                 BaseView.inflateLayout(layout, getContext(), this);
                 inflateComponents();
                 inflated = true;

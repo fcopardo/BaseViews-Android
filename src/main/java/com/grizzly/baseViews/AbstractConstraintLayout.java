@@ -46,19 +46,25 @@ public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout i
     protected void inflateBaseLayout(){
         setContainer();
         if(layout>0){
-            try{
-                BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
-                    public void onInflateFinished(View view, int resid, ViewGroup parent) {
-                        //addView(view);
-                        inflateComponents();
-                        inflated = true;
-                        if(data != null) setData(data);
-                    }
-                }, true);
-            }catch (InflateException e){
-                Log.e("BaseViews", "View inflation failing for class "+getClass().getSimpleName()+" with layout "+layout
-                        +"\nresorting to regular inflation ");
-                e.printStackTrace();
+            if(async){
+                if(this.getParent()!= null){
+                    BaseView.inflateLayout(layout, getActivity(), (ViewGroup) this.getParent(), new AsyncLayoutInflater.OnInflateFinishedListener() {
+                        public void onInflateFinished(View view, int resid, ViewGroup parent) {
+                            inflateComponents();
+                            inflated = true;
+                            if(data != null) setData(data);
+                        }
+                    }, true);
+                }else{
+                    BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
+                        public void onInflateFinished(View view, int resid, ViewGroup parent) {
+                            inflateComponents();
+                            inflated = true;
+                            if(data != null) setData(data);
+                        }
+                    }, true);
+                }
+            }else{
                 BaseView.inflateLayout(layout, getContext(), this);
                 inflateComponents();
                 inflated = true;

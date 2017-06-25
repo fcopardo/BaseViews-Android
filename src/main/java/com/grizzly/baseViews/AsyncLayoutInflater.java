@@ -200,10 +200,12 @@ public final class AsyncLayoutInflater {
                 try {
                     request.view = request.inflater.mInflater.inflate(
                             request.resid, request.parent, request.attachToParent);
+                    Log.w("BaseViews", "Asynchronous inflation done");
                 } catch (RuntimeException ex) {
                     // Probably a Looper failure, retry on the UI thread
                     Log.w(TAG, "Failed to inflate resource in the background! Retrying on the UI"
                             + " thread", ex);
+                    Log.e("BaseViews", "Synchronous inflation done");
                 }
                 Message.obtain(request.inflater.mHandler, 0, request)
                         .sendToTarget();

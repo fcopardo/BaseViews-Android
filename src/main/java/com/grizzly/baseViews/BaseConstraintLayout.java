@@ -19,9 +19,12 @@ public abstract class BaseConstraintLayout extends ConstraintLayout {
 
     protected int layout = 0;
     protected boolean inflated = false;
+    protected boolean async = false;
 
     public BaseConstraintLayout(Context context) {
         super(context);
+        ConstraintLayout.LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        setLayoutParams(params);
         inflateBaseLayout();
     }
 
@@ -40,13 +43,17 @@ public abstract class BaseConstraintLayout extends ConstraintLayout {
         setContainer();
         if(layout>0){
             //BaseView.inflateLayout(layout, getContext(), this);
-            BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
-                public void onInflateFinished(View view, int resid, ViewGroup parent) {
-                    addView(view);
-                    inflateComponents();
-                    inflated = true;
-                }
-            }, true);
+            if(async) {
+                BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
+                    public void onInflateFinished(View view, int resid, ViewGroup parent) {
+                        inflateComponents();
+                        inflated = true;
+                    }
+                }, true);
+            }else{
+                BaseView.inflateLayout(layout, getContext(), this);
+                inflateComponents();
+            }
         }
         //inflateComponents();
     }

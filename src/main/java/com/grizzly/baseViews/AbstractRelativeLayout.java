@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.view.*;
 import android.support.v4.view.AsyncLayoutInflater.OnInflateFinishedListener;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -53,19 +54,15 @@ public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout imple
     protected void inflateBaseLayout(){
         setContainer();
         if(layout>0){
-            try{
-                BaseView.inflateLayout(layout, getActivity(), this, new OnInflateFinishedListener() {
+            if(async){
+                BaseView.inflateLayout(layout, getActivity(), this, new android.support.v4.view.AsyncLayoutInflater.OnInflateFinishedListener() {
                     public void onInflateFinished(View view, int resid, ViewGroup parent) {
-                        //addView(view);
                         inflateComponents();
                         inflated = true;
                         if(data != null) setData(data);
                     }
                 }, true);
-            }catch (InflateException e){
-                Log.e("BaseViews", "View inflation failing for class "+getClass().getSimpleName()+" with layout "+layout
-                        +"\nresorting to regular inflation ");
-                e.printStackTrace();
+            }else{
                 BaseView.inflateLayout(layout, getContext(), this);
                 inflateComponents();
                 inflated = true;
