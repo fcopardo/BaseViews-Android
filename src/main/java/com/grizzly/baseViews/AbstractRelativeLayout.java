@@ -39,7 +39,7 @@ public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout imple
 
     public void setData(T data){
         this.data = data;
-        if(data != null) setControls();
+        if(data != null && inflated) setControls();
     }
 
     public T getData(){
