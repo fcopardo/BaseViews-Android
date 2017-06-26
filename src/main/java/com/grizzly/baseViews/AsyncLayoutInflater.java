@@ -114,8 +114,13 @@ public final class AsyncLayoutInflater {
         public boolean handleMessage(Message msg) {
             InflateRequest request = (InflateRequest) msg.obj;
             if (request.view == null) {
-                request.view = mInflater.inflate(
-                        request.resid, request.parent, false);
+                if(request.parent.getChildCount() == 0){
+                    request.view = mInflater.inflate(
+                            request.resid, request.parent, request.attachToParent);
+
+                }else{
+                    request.view = request.parent;
+                }
             }
             request.callback.onInflateFinished(
                     request.view, request.resid, request.parent);
