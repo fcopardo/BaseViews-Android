@@ -50,7 +50,7 @@ public abstract class BaseRelativeLayout extends RelativeLayout {
             try{
                 BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
                     public void onInflateFinished(View view, int resid, ViewGroup parent) {
-                        addView(view);
+                        //addView(view);
                         inflateComponents();
                         inflated = true;
                     }

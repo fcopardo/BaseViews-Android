@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 /**
  * Created by FcoPardo on 3/6/16.
@@ -43,6 +44,10 @@ public abstract class AbstractLinearLayout<T> extends BaseLinearLayout implement
 
     public T getData(){
         return data;
+    }
+
+    public String getBaseClassName(){
+        return LinearLayout.class.getCanonicalName();
     }
 
     protected abstract void setControls();

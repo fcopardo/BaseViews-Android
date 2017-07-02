@@ -42,7 +42,7 @@ public abstract class BaseConstraintLayout extends ConstraintLayout {
             //BaseView.inflateLayout(layout, getContext(), this);
             BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
                 public void onInflateFinished(View view, int resid, ViewGroup parent) {
-                    addView(view);
+                    //addView(view);
                     inflateComponents();
                     inflated = true;
                 }

@@ -3,6 +3,7 @@ package com.grizzly.baseViews;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.AsyncLayoutInflater;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -37,6 +38,10 @@ public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout i
 
     public T getData(){
         return data;
+    }
+
+    public String getBaseClassName(){
+        return ConstraintLayout.class.getCanonicalName();
     }
 
     protected abstract void setControls();

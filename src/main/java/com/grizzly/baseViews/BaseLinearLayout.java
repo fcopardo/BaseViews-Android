@@ -53,7 +53,7 @@ public abstract class BaseLinearLayout extends LinearLayout {
             try{
                 BaseView.inflateLayout(layout, getActivity(), this, new AsyncLayoutInflater.OnInflateFinishedListener() {
                     public void onInflateFinished(View view, int resid, ViewGroup parent) {
-                        addView(view);
+                        //addView(view);
                         inflateComponents();
                         inflated = true;
                     }

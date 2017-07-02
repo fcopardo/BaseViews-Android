@@ -24,6 +24,7 @@ public class BaseView {
     public interface OnDataDrivenView<T>{
         void setData(T data);
         T getData();
+        String getBaseClassName();
     }
 
     static View inflateLayout(int layout, Context context, ViewGroup group){

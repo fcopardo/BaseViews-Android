@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 /**
  * Created by FcoPardo on 3/6/16.
@@ -43,6 +44,10 @@ public abstract class AbstractFrameLayout<T> extends BaseFrameLayout implements 
 
     public T getData(){
         return data;
+    }
+
+    public String getBaseClassName(){
+        return FrameLayout.class.getCanonicalName();
     }
 
     protected abstract void setControls();

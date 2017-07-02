@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 
 /**
@@ -44,6 +45,10 @@ public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout imple
 
     public T getData(){
         return data;
+    }
+
+    public String getBaseClassName(){
+        return RelativeLayout.class.getCanonicalName();
     }
 
     protected abstract void setControls();

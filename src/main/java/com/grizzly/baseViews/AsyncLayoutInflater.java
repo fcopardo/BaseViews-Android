@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.view.AsyncLayoutInflater.OnInflateFinishedListener;
 
+import java.util.Calendar;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -114,12 +115,34 @@ public final class AsyncLayoutInflater {
         public boolean handleMessage(Message msg) {
             InflateRequest request = (InflateRequest) msg.obj;
             if (request.view == null) {
-                if(request.parent.getChildCount() == 0){
-                    request.view = mInflater.inflate(
-                            request.resid, request.parent, request.attachToParent);
-
+                request.view = mInflater.inflate(
+                        request.resid, request.parent, request.attachToParent);
+            }else{
+                if (request.parent != null && request.parent instanceof BaseView.OnDataDrivenView && request.view.getClass().getCanonicalName().equalsIgnoreCase(((BaseView.OnDataDrivenView) request.parent).getBaseClassName())){
+                    ViewGroup viewGroup = (ViewGroup) request.view;
+                    if(request.parent.getParent() == null) {
+                        request.parent.setLayoutParams(viewGroup.getLayoutParams());
+                    }
+                    Log.e(TAG, "Timer "+ Calendar.getInstance().getTimeInMillis());
+                    for(int c = 0; c<viewGroup.getChildCount();c++){
+                        View view = viewGroup.getChildAt(c);
+                        viewGroup.removeView(view);
+                        request.parent.addView(view, c);
+                        if(c>0){
+                            if(viewGroup.getChildCount()-c>c){
+                                View aView = viewGroup.getChildAt(viewGroup.getChildCount()-c);
+                                viewGroup.removeView(aView);
+                                request.parent.addView(aView, viewGroup.getChildCount()-c);
+                            }else break;
+                        }
+                    }
+                    Log.e(TAG, "Timer "+ Calendar.getInstance().getTimeInMillis());
                 }else{
-                    request.view = request.parent;
+                    if(request.parent!=null){
+                        Log.e(TAG, "parent class "+request.parent.getClass().getCanonicalName());
+                        Log.e(TAG, "view class "+request.view.getClass().getCanonicalName());
+                        if(request.attachToParent) request.parent.addView(request.view);
+                    }
                 }
             }
             request.callback.onInflateFinished(
@@ -204,7 +227,7 @@ public final class AsyncLayoutInflater {
 
                 try {
                     request.view = request.inflater.mInflater.inflate(
-                            request.resid, request.parent, request.attachToParent);
+                            request.resid, request.parent, false);
                 } catch (RuntimeException ex) {
                     // Probably a Looper failure, retry on the UI thread
                     Log.w(TAG, "Failed to inflate resource in the background! Retrying on the UI"
