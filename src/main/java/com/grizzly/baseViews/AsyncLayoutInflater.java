@@ -123,7 +123,7 @@ public final class AsyncLayoutInflater {
                     if(request.parent.getParent() == null) {
                         request.parent.setLayoutParams(viewGroup.getLayoutParams());
                     }
-                    Log.e(TAG, "Timer "+ Calendar.getInstance().getTimeInMillis());
+                    Log.e(TAG, "Timer start"+ Calendar.getInstance().getTimeInMillis());
                     for(int c = 0; c<viewGroup.getChildCount();c++){
                         View view = viewGroup.getChildAt(c);
                         viewGroup.removeView(view);
@@ -136,7 +136,8 @@ public final class AsyncLayoutInflater {
                             }else break;
                         }
                     }
-                    Log.e(TAG, "Timer "+ Calendar.getInstance().getTimeInMillis());
+                    request.view = request.parent;
+                    Log.e(TAG, "Timer end"+ Calendar.getInstance().getTimeInMillis());
                 }else{
                     if(request.parent!=null){
                         Log.e(TAG, "parent class "+request.parent.getClass().getCanonicalName());
