@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 public abstract class BaseLinearLayout extends LinearLayout {
 
     protected int layout = 0;
+    protected int parentType = BaseView.PARENT_UNKNOW;
 
     public BaseLinearLayout(Context context) {
         super(context);
@@ -51,5 +52,14 @@ public abstract class BaseLinearLayout extends LinearLayout {
 
     protected Activity getActivity(){
         return BaseView.getActivity(this);
+    }
+
+    public int getParentType() {
+        return parentType;
+    }
+
+    public <T extends BaseLinearLayout> T setParentType(@BaseView.ParentType int parentType) {
+        this.parentType = parentType;
+        return (T) this;
     }
 }
