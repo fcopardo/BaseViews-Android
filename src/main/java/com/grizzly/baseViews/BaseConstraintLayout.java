@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 public abstract class BaseConstraintLayout extends ConstraintLayout {
 
     protected int layout = 0;
+    protected int parentType = BaseView.PARENT_UNKNOW;
 
     public BaseConstraintLayout(Context context) {
         super(context);
@@ -27,7 +28,6 @@ public abstract class BaseConstraintLayout extends ConstraintLayout {
         inflateBaseLayout();
     }
 
-
     protected void inflateBaseLayout(){
         setContainer();
         if(layout>0)BaseView.inflateLayout(layout, getContext(), this);
@@ -40,5 +40,14 @@ public abstract class BaseConstraintLayout extends ConstraintLayout {
 
     protected Activity getActivity(){
         return BaseView.getActivity(this);
+    }
+
+    public int getParentType() {
+        return parentType;
+    }
+
+    public <T extends BaseConstraintLayout> T setParentType(@BaseView.ParentType int parentType) {
+        this.parentType = parentType;
+        return (T) this;
     }
 }

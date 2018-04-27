@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 public abstract class BaseRelativeLayout extends RelativeLayout {
 
     protected int layout = 0;
+    protected int parentType = BaseView.PARENT_UNKNOW;
 
     public BaseRelativeLayout(Context context) {
         super(context);
@@ -49,5 +50,14 @@ public abstract class BaseRelativeLayout extends RelativeLayout {
 
     protected Activity getActivity(){
         return BaseView.getActivity(this);
+    }
+
+    public int getParentType() {
+        return parentType;
+    }
+
+    public <T extends BaseRelativeLayout> T setParentType(@BaseView.ParentType int parentType) {
+        this.parentType = parentType;
+        return (T) this;
     }
 }

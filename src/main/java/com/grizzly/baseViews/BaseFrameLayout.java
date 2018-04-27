@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 public abstract class BaseFrameLayout extends FrameLayout {
 
     protected int layout = 0;
+    protected int parentType = BaseView.PARENT_UNKNOW;
 
     public BaseFrameLayout(Context context) {
         super(context);
@@ -50,5 +51,14 @@ public abstract class BaseFrameLayout extends FrameLayout {
 
     protected Activity getActivity(){
         return BaseView.getActivity(this);
+    }
+
+    public int getParentType() {
+        return parentType;
+    }
+
+    public <T extends BaseFrameLayout> T setParentType(@BaseView.ParentType int parentType) {
+        this.parentType = parentType;
+        return (T) this;
     }
 }
