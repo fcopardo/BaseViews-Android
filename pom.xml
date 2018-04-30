@@ -89,7 +89,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<sdk>
-						<platform>26</platform>
+						<platform>27</platform>
 					</sdk>
 				</configuration>
 			</plugin>
