@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 /**
  * Created by FcoPardo on 3/6/16.
  */
-public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout {
+public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout implements BaseView.OnDataDrivenView<T> {
 
     protected T data;
     protected Class<T> dataClass;
@@ -25,7 +25,11 @@ public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout {
 
     public void setData(T data){
         this.data = data;
-        setControls();
+        if(data != null)setControls();
+    }
+
+    public T getData(){
+        return data;
     }
 
     protected abstract void setControls();
