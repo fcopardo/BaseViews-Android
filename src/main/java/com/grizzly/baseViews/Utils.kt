@@ -13,7 +13,7 @@ inline fun <T : View> with(obj: T, f: T.() -> Unit): T {
     return obj
 }
 
-inline fun View.getActivity(): Activity? {
+fun View.getActivity(): Activity? {
     var context = this.context
     while (context is ContextWrapper) {
         if (context is Activity) {

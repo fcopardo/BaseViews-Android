@@ -30,12 +30,13 @@ public abstract class AbstractRelativeLayout<T> extends BaseRelativeLayout imple
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void setData(T data){
+    public <X extends BaseView.OnDataDrivenView<T>> X setData(T aData) {
         this.data = data;
-        if(data != null) setControls();
+        if(data != null)setControls();
+        return (X) this;
     }
 
-    public T getData(){
+    public T getData() {
         return data;
     }
 

@@ -31,12 +31,13 @@ public abstract class AbstractLinearLayout<T> extends BaseLinearLayout implement
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void setData(T data){
-        this.data = data;
+    public <X extends BaseView.OnDataDrivenView<T>> X setData(T aData) {
+        this.data = aData;
         if(data != null)setControls();
+        return (X) this;
     }
 
-    public T getData(){
+    public T getData() {
         return data;
     }
 

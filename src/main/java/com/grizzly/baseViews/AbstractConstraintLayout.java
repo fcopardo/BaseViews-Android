@@ -23,14 +23,15 @@ public abstract class AbstractConstraintLayout<T> extends BaseConstraintLayout i
         super(context, attrs, defStyleAttr);
     }
 
-    public void setData(T data){
-        this.data = data;
+    protected abstract void setControls();
+
+    public <X extends BaseView.OnDataDrivenView<T>> X setData(T aData) {
+        this.data = aData;
         if(data != null)setControls();
+        return (X) this;
     }
 
-    public T getData(){
+    public T getData() {
         return data;
     }
-
-    protected abstract void setControls();
 }
