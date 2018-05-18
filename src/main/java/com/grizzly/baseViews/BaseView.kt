@@ -37,8 +37,8 @@ class BaseView {
     annotation class ParentType
 
     interface OnDataDrivenView<T> : OnVariableView {
-        fun getData() : T
         fun <X : OnDataDrivenView<T>> setData(aData : T) : X
+        fun getData(): T?
     }
 
     interface OnVariableView {
