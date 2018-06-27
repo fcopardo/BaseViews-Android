@@ -14,10 +14,9 @@ abstract class AbstractRelativeLayout<T> : BaseRelativeLayout, BaseView.OnDataDr
     @JvmField
     protected var dataClass: Class<T>? = null
 
-    override fun <X : BaseView.OnDataDrivenView<T>> setData(aData: T): X {
+    override fun setData(aData: T) {
         this.myData = aData
         if (myData != null) setControls()
-        return this as X
     }
 
     override fun getData(): T? {

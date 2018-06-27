@@ -3,7 +3,7 @@ package com.grizzly.baseViews
 import android.content.Context
 import android.util.AttributeSet
 
-abstract class AbstractLinearLayout<T> : BaseLinearLayout, BaseView.OnDataDrivenView<T> {
+abstract class AbstractFrameLayout<T> : BaseFrameLayout, BaseView.OnDataDrivenView<T> {
 
     constructor(context : Context) : super(context)
     constructor(context : Context, attrs : AttributeSet) : super(context, attrs)
@@ -14,10 +14,9 @@ abstract class AbstractLinearLayout<T> : BaseLinearLayout, BaseView.OnDataDriven
     @JvmField
     protected var dataClass: Class<T>? = null
 
-    override fun <X : BaseView.OnDataDrivenView<T>> setData(aData: T): X {
+    override fun setData(aData: T) {
         this.myData = aData
         if (myData != null) setControls()
-        return this as X
     }
 
     override fun getData(): T? {
