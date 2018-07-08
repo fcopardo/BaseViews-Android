@@ -28,5 +28,5 @@ proguard/
 
 .idea/
 *.iml
-gen-external-apklibs
+gen-external-apklibs/
 
