@@ -10,7 +10,6 @@ import android.util.AttributeSet
 open abstract class BaseConstraintLayout : ConstraintLayout, BaseView.OnVariableView {
 
     override var layout = 0
-    override var aParentType = BaseView.PARENT_UNKNOW
 
     constructor(context : Context) : super(context){
         inflateBaseLayout()

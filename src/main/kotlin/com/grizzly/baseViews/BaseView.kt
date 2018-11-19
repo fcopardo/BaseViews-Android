@@ -32,10 +32,6 @@ class BaseView {
         }
     }
 
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef(PARENT_UNKNOW, PARENT_LISTVIEW, PARENT_RECYCLER)
-    annotation class ParentType
-
     interface OnDataDrivenView<T> : OnVariableView {
         fun setData(aData : T)
         fun getData(): T?
@@ -44,7 +40,6 @@ class BaseView {
     interface OnVariableView {
 
         var layout : Int
-        var aParentType : Int
 
         fun ViewGroup.inflateBaseLayout() {
             setContainer()
@@ -55,12 +50,5 @@ class BaseView {
         fun inflateComponents()
 
         fun setContainer()
-
-        fun getParentType(): Int = aParentType.toInt()
-
-        fun <T : OnVariableView> setParentType(@BaseView.ParentType parentType: Int): T {
-            this.aParentType = parentType
-            return this as T
-        }
     }
 }

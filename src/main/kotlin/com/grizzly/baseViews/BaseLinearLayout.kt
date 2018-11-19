@@ -10,7 +10,6 @@ import android.widget.LinearLayout
 open abstract class BaseLinearLayout : LinearLayout, BaseView.OnVariableView {
 
     override var layout = 0
-    override var aParentType = BaseView.PARENT_UNKNOW
 
     constructor(context : Context) : super(context){
         inflateBaseLayout()
