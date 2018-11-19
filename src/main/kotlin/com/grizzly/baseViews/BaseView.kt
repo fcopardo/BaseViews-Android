@@ -14,10 +14,7 @@ import java.lang.annotation.RetentionPolicy
  */
 class BaseView {
 
-    companion object instance{
-        const val PARENT_UNKNOW   : Int = 0x0000
-        const val PARENT_LISTVIEW : Int = 0x0001
-        const val PARENT_RECYCLER : Int = 0x0002
+    companion object Instance{
 
         @JvmStatic
         internal fun inflateLayout(layout: Int, context: Context, group: ViewGroup): View {
